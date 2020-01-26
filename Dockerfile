@@ -2,6 +2,11 @@ FROM composer:1.8.6 AS composer
 
 FROM php:7.1.0-alpine
 
+LABEL \
+    org.label-schema.schema-version="1.0" \
+    org.label-schema.name="cloud-payments-laravel" \
+    org.label-schema.vendor="avto-dev"
+
 ENV \
     COMPOSER_ALLOW_SUPERUSER="1" \
     COMPOSER_HOME="/tmp/composer"
@@ -22,6 +27,5 @@ RUN set -xe \
     && php -v \
     && php -m
 
-WORKDIR /src
+WORKDIR /app
 
-VOLUME ["/src"]

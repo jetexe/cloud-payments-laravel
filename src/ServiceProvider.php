@@ -4,13 +4,12 @@ declare(strict_types = 1);
 
 namespace AvtoDev\CloudPayments;
 
-use AvtoDev\CloudPayments\Client\Client;
-use AvtoDev\CloudPayments\Client\ClientInterface;
-use GuzzleHttp\ClientInterface as GuzzleHttpClientInterface;
+use GuzzleHttp\Client as GuzzleClient;
 use Illuminate\Contracts\Config\Repository;
 use Illuminate\Contracts\Container\Container;
+use Illuminate\Support\ServiceProvider as BaseServiceProvider;
 
-class ServiceProvider extends \Illuminate\Support\ServiceProvider
+class ServiceProvider extends BaseServiceProvider
 {
     /**
      * Register package services.
@@ -19,21 +18,19 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
      */
     public function register(): void
     {
-        $this->initializeConfigs();
+        $this->registerService();
+    }
 
+    public function registerService(): void
+    {
         $this->app->bind(Client::class, function (Container $app) {
-            $http_client = $app->make(GuzzleHttpClientInterface::class);
-            /** @var Repository $config */
-            $config = $app->make(Repository::class);
+            $client = $app->make(GuzzleClient::class);
 
-            return new Client(
-                $http_client,
-                $config->get(static::getConfigRootKeyName() . '.cloud_payments.public_key', ''),
-                $config->get(static::getConfigRootKeyName() . '.cloud_payments.private_key', '')
-            );
+            /** @var Repository $config_repository */
+            $config_repository = $app->make(Repository::class);
+
+            return new Client($client, new Config($config_repository->get('services.cloud_payments')));
         });
-
-        $this->app->bind(ClientInterface::class, Client::class);
     }
 
     /**
@@ -41,7 +38,7 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
      *
      * @return string
      */
-    public static function getConfigPath()
+    public static function getConfigPath(): string
     {
         return __DIR__ . '/../config/services.php';
     }
@@ -51,7 +48,7 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
      *
      * @return string
      */
-    public static function getConfigRootKeyName()
+    public static function getConfigRootKeyName(): string
     {
         return \basename(static::getConfigPath(), '.php');
     }
