@@ -12,8 +12,8 @@
          stopOnFailure="false">
 
     <testsuites>
-        <testsuite name="Project Test Suite">
-            <directory suffix="Test.php">./tests</directory>
+        <testsuite name="Feature">
+            <directory suffix="Test.php">./tests/Feature</directory>
         </testsuite>
     </testsuites>
 

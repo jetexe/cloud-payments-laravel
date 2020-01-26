@@ -1,6 +1,6 @@
 <?php
 
-namespace AvtoDev\CloudPayments\Requests\Cards;
+namespace AvtoDev\CloudPayments\Requests\Payments\Cards;
 
 use GuzzleHttp\Psr7\Uri;
 use Psr\Http\Message\UriInterface;
@@ -8,13 +8,13 @@ use Psr\Http\Message\UriInterface;
 /**
  * @see https://developers.cloudpayments.ru/#oplata-po-kriptogramme
  */
-class CardsChargeRequestFactory extends CardsAuthRequestBuilder
+class CardsChargeRequestBuilder extends CardsAuthRequestBuilder
 {
     /**
      * {@inheritDoc}
      */
     protected function getUti(): UriInterface
     {
-        return new Uri('cards/charge');
+        return new Uri('/payments/cards/charge');
     }
 }

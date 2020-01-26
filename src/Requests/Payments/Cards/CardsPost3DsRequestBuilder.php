@@ -2,7 +2,7 @@
 
 declare(strict_types = 1);
 
-namespace AvtoDev\CloudPayments\Requests\Cards;
+namespace AvtoDev\CloudPayments\Requests\Payments\Cards;
 
 use GuzzleHttp\Psr7\Uri;
 use Psr\Http\Message\UriInterface;
@@ -91,6 +91,6 @@ class CardsPost3DsRequestBuilder extends AbstractRequestBuilder
      */
     protected function getUti(): UriInterface
     {
-        return new Uri('/cards/post3ds');
+        return new Uri('/payments/cards/post3ds');
     }
 }

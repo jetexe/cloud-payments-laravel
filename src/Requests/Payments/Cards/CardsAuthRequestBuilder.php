@@ -2,7 +2,7 @@
 
 declare(strict_types = 1);
 
-namespace AvtoDev\CloudPayments\Requests\Cards;
+namespace AvtoDev\CloudPayments\Requests\Payments\Cards;
 
 use GuzzleHttp\Psr7\Uri;
 use Psr\Http\Message\UriInterface;
@@ -64,7 +64,7 @@ class CardsAuthRequestBuilder extends AbstractRequestBuilder
      */
     public function getRequestParams(): array
     {
-        $this->json_data = \array_merge($this->json_data, $this->getRequestParams());
+        $this->json_data = \array_merge($this->json_data ?? [], $this->getReceiptData());
 
         return \array_merge($this->getCommonPaymentParams(), [
             'Name'                 => $this->name,
@@ -77,6 +77,6 @@ class CardsAuthRequestBuilder extends AbstractRequestBuilder
      */
     protected function getUti(): UriInterface
     {
-        return new Uri('cards/auth');
+        return new Uri('/payments/cards/auth');
     }
 }

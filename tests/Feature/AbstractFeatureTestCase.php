@@ -13,12 +13,17 @@ class AbstractFeatureTestCase extends AbstractTestCase
      */
     protected $cloud_payments_client;
 
+    /**
+     * @var array
+     */
+    protected $config = [];
+
     public function setUp(): void
     {
         parent::setUp();
 
-        $config = require __DIR__ . '/config.php';
+        $this->config = require __DIR__ . '/config.php';
 
-        $this->cloud_payments_client = Client::factory(new Config($config['cloud_payments']));
+        $this->cloud_payments_client = Client::factory(new Config($this->config['cloud_payments']));
     }
 }
