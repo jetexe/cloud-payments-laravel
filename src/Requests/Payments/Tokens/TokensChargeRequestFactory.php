@@ -1,7 +1,8 @@
 <?php
 
-namespace AvtoDev\CloudPayments\Requests\Tokens;
+namespace AvtoDev\CloudPayments\Requests\Payments\Tokens;
 
+use AvtoDev\CloudPayments\Requests\Payments\Tokens\TokensAuthRequestBuilder;
 use GuzzleHttp\Psr7\Uri;
 use Psr\Http\Message\UriInterface;
 

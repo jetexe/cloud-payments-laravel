@@ -2,7 +2,7 @@
 
 declare(strict_types = 1);
 
-namespace AvtoDev\CloudPayments\Requests\Tokens;
+namespace AvtoDev\CloudPayments\Requests\Payments\Tokens;
 
 use AvtoDev\CloudPayments\Requests\AbstractRequestBuilder;
 use AvtoDev\CloudPayments\Requests\Traits\HasReceipt;
@@ -24,6 +24,14 @@ class TokensAuthRequestBuilder extends AbstractRequestBuilder
      * @var string
      */
     protected $token;
+
+    /**
+     * @return string
+     */
+    public function getToken(): string
+    {
+        return $this->token;
+    }
 
     /**
      * Required.

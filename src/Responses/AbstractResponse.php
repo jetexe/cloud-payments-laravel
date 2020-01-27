@@ -2,13 +2,8 @@
 
 namespace AvtoDev\CloudPayments\Responses;
 
-abstract class AbstractResponse
+abstract class AbstractResponse implements ResponseInterface
 {
-    /**
-     * @var array
-     */
-    protected $model_fields = [];
-
     /**
      * @var bool
      */
@@ -30,9 +25,9 @@ abstract class AbstractResponse
     /**
      * @param bool $success
      *
-     * @return AbstractResponse
+     * @return $this
      */
-    public function setSuccess(bool $success): AbstractResponse
+    public function setSuccess(bool $success): self
     {
         $this->success = $success;
 
@@ -50,31 +45,11 @@ abstract class AbstractResponse
     /**
      * @param string $message
      *
-     * @return AbstractResponse
+     * @return $this
      */
-    public function setMessage(string $message): AbstractResponse
+    public function setMessage(string $message): self
     {
         $this->message = $message;
-
-        return $this;
-    }
-
-    /**
-     * @return array
-     */
-    public function getModel(): array
-    {
-        return $this->model_fields;
-    }
-
-    /**
-     * @param array $model_fields
-     *
-     * @return AbstractResponse
-     */
-    public function setModel(array $model_fields): AbstractResponse
-    {
-        $this->model_fields = $model_fields;
 
         return $this;
     }

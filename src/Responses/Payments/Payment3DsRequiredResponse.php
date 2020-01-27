@@ -1,11 +1,14 @@
 <?php
 
-namespace AvtoDev\CloudPayments\Responses\Payments\Cards;
+namespace AvtoDev\CloudPayments\Responses\Payments;
 
+use AvtoDev\CloudPayments\Responses\Traits\HasModel;
 use AvtoDev\CloudPayments\Responses\AbstractResponse;
 
 class Payment3DsRequiredResponse extends AbstractResponse
 {
+    use HasModel;
+
     /**
      * @return int
      */

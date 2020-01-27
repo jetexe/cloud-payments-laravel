@@ -48,6 +48,22 @@ class CardsAuthRequestBuilder extends AbstractRequestBuilder
     }
 
     /**
+     * @return string
+     */
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCardCryptogramPacket(): string
+    {
+        return $this->card_cryptogram_packet;
+    }
+
+    /**
      * @param string $card_cryptogram_packet
      *
      * @return CardsAuthRequestBuilder

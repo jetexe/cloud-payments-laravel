@@ -6,7 +6,7 @@ use AvtoDev\CloudPayments\Client;
 use AvtoDev\CloudPayments\Config;
 use AvtoDev\Tests\AbstractTestCase;
 
-class AbstractFeatureTestCase extends AbstractTestCase
+abstract class AbstractFeatureTestCase extends AbstractTestCase
 {
     /**
      * @var Client

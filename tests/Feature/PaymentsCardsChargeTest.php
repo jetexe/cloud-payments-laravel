@@ -18,6 +18,6 @@ class PaymentsCardsChargeTest extends AbstractFeatureTestCase
         $this->expectException(InvalidRequestException::class);
         $response = $this->cloud_payments_client->send($request->buildRequest());
 
-        ResponseParser::parsePaymentCardAuthResponse($response);
+        ResponseParser::parsePaymentResponse($response);
     }
 }

@@ -22,10 +22,10 @@ class TestRequestTest extends AbstractFeatureTestCase
 
         $response = $this->cloud_payments_client->send($request->buildRequest());
 
-        $message = ResponseParser::parseTestResponse($response)->getMessage();
+        $message = ResponseParser::parseSimpleResponse($response)->getMessage();
 
         $response = $this->cloud_payments_client->send($request->buildRequest());
 
-        $this->assertSame($message, ResponseParser::parseTestResponse($response)->getMessage());
+        $this->assertSame($message, ResponseParser::parseSimpleResponse($response)->getMessage());
     }
 }

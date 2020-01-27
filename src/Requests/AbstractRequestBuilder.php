@@ -37,6 +37,14 @@ abstract class AbstractRequestBuilder
     }
 
     /**
+     * @return string
+     */
+    public function getRequestId(): string
+    {
+        return $this->request_id;
+    }
+
+    /**
      * @return RequestInterface
      * @throws \Tarampampam\Wrappers\Exceptions\JsonEncodeDecodeException
      */
