@@ -11,22 +11,22 @@ use AvtoDev\CloudPayments\References\PaymentObject;
 class Item
 {
     /**
-     * @var string
+     * @var string|null
      */
     protected $label;
 
     /**
-     * @var float
+     * @var float|null
      */
     protected $price;
 
     /**
-     * @var float
+     * @var float|null
      */
     protected $quantity;
 
     /**
-     * @var float
+     * @var float|null
      */
     protected $amount;
 
@@ -40,28 +40,36 @@ class Item
     /**
      * @see PaymentType
      *
-     * @var int
+     * @var int|null
      */
     protected $method;
 
     /**
      * @see PaymentObject
      *
-     * @var int
+     * @var int|null
      */
     protected $object;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $measurement_unit;
 
     /**
-     * @param string $label
-     *
-     * @return Item
+     * @return string|null
      */
-    public function setLabel(string $label): self
+    public function getLabel(): ?string
+    {
+        return $this->label;
+    }
+
+    /**
+     * @param string|null $label
+     *
+     * @return $this
+     */
+    public function setLabel(?string $label): self
     {
         $this->label = $label;
 
@@ -69,11 +77,19 @@ class Item
     }
 
     /**
-     * @param float $price
-     *
-     * @return Item
+     * @return float|null
      */
-    public function setPrice(float $price): self
+    public function getPrice(): ?float
+    {
+        return $this->price;
+    }
+
+    /**
+     * @param float|null $price
+     *
+     * @return $this
+     */
+    public function setPrice(?float $price): self
     {
         $this->price = $price;
 
@@ -81,11 +97,19 @@ class Item
     }
 
     /**
-     * @param float $quantity
-     *
-     * @return Item
+     * @return float|null
      */
-    public function setQuantity(float $quantity): self
+    public function getQuantity(): ?float
+    {
+        return $this->quantity;
+    }
+
+    /**
+     * @param float|null $quantity
+     *
+     * @return $this
+     */
+    public function setQuantity(?float $quantity): self
     {
         $this->quantity = $quantity;
 
@@ -93,11 +117,19 @@ class Item
     }
 
     /**
-     * @param float $amount
-     *
-     * @return Item
+     * @return float|null
      */
-    public function setAmount(float $amount): self
+    public function getAmount(): ?float
+    {
+        return $this->amount;
+    }
+
+    /**
+     * @param float|null $amount
+     *
+     * @return $this
+     */
+    public function setAmount(?float $amount): self
     {
         $this->amount = $amount;
 
@@ -105,9 +137,17 @@ class Item
     }
 
     /**
+     * @return int|null
+     */
+    public function getVat(): ?int
+    {
+        return $this->vat;
+    }
+
+    /**
      * @param int|null $vat
      *
-     * @return Item
+     * @return $this
      */
     public function setVat(?int $vat): self
     {
@@ -117,13 +157,19 @@ class Item
     }
 
     /**
-     * @param int $method
-     *
-     * @return Item
-     * @see PaymentType
-     *
+     * @return int|null
      */
-    public function setMethod(int $method): self
+    public function getMethod(): ?int
+    {
+        return $this->method;
+    }
+
+    /**
+     * @param int|null $method
+     *
+     * @return $this
+     */
+    public function setMethod(?int $method): self
     {
         $this->method = $method;
 
@@ -131,11 +177,19 @@ class Item
     }
 
     /**
-     * @param int $object
-     *
-     * @return Item
+     * @return int|null
      */
-    public function setObject(int $object): self
+    public function getObject(): ?int
+    {
+        return $this->object;
+    }
+
+    /**
+     * @param int|null $object
+     *
+     * @return $this
+     */
+    public function setObject(?int $object): self
     {
         $this->object = $object;
 
@@ -143,11 +197,19 @@ class Item
     }
 
     /**
-     * @param string $measurement_unit
-     *
-     * @return Item
+     * @return string|null
      */
-    public function setMeasurementUnit(string $measurement_unit): self
+    public function getMeasurementUnit(): ?string
+    {
+        return $this->measurement_unit;
+    }
+
+    /**
+     * @param string|null $measurement_unit
+     *
+     * @return $this
+     */
+    public function setMeasurementUnit(?string $measurement_unit): self
     {
         $this->measurement_unit = $measurement_unit;
 

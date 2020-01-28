@@ -31,7 +31,7 @@ class SubscriptionsCancelRequestBuilder extends AbstractRequestBuilder
     /**
      * {@inheritDoc}
      */
-    protected function getUti(): UriInterface
+    protected function getUri(): UriInterface
     {
         return new Uri('/subscriptions/cancel');
     }

@@ -9,63 +9,71 @@ use AvtoDev\CloudPayments\References\TaxationSystem;
 class Receipt
 {
     /**
-     * @var array|Item[]|array<Item>
+     * @var Item[]
      */
     protected $items = [];
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $calculation_place;
 
     /**
      * @see TaxationSystem
      *
-     * @var int
+     * @var int|null
      */
     protected $taxation_system;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $email;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $phone;
 
     /**
      * Strict accountability form.
      *
-     * @var bool
+     * @var bool|null
      */
-    protected $is_bso = false;
+    protected $is_bso;
 
     /**
-     * @var float
+     * @var float|null
      */
     protected $electronic_amount;
 
     /**
-     * @var float
+     * @var float|null
      */
     protected $advance_payment_amount;
 
     /**
-     * @var float
+     * @var float|null
      */
     protected $credit_amount;
 
     /**
-     * @var float
+     * @var float|null
      */
     protected $provision_amount;
 
     /**
-     * @param array|Item[]|array<Item> $items
+     * @return Item[]
+     */
+    public function getItems(): array
+    {
+        return $this->items;
+    }
+
+    /**
+     * @param Item[] $items
      *
-     * @return Receipt
+     * @return $this
      */
     public function setItems(array $items): self
     {
@@ -75,11 +83,31 @@ class Receipt
     }
 
     /**
-     * @param string $calculation_place
+     * @param Item $item
      *
-     * @return Receipt
+     * @return $this
      */
-    public function setCalculationPlace(string $calculation_place): self
+    public function addItem(Item $item): self
+    {
+        $this->items[] = $item;
+
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getCalculationPlace(): ?string
+    {
+        return $this->calculation_place;
+    }
+
+    /**
+     * @param string|null $calculation_place
+     *
+     * @return $this
+     */
+    public function setCalculationPlace(?string $calculation_place): self
     {
         $this->calculation_place = $calculation_place;
 
@@ -87,13 +115,19 @@ class Receipt
     }
 
     /**
-     * @param int $taxation_system
-     *
-     * @return Receipt
-     * @see TaxationSystem
-     *
+     * @return int|null
      */
-    public function setTaxationSystem(int $taxation_system): self
+    public function getTaxationSystem(): ?int
+    {
+        return $this->taxation_system;
+    }
+
+    /**
+     * @param int|null $taxation_system
+     *
+     * @return $this
+     */
+    public function setTaxationSystem(?int $taxation_system): self
     {
         $this->taxation_system = $taxation_system;
 
@@ -101,11 +135,19 @@ class Receipt
     }
 
     /**
-     * @param string $email
-     *
-     * @return Receipt
+     * @return string|null
      */
-    public function setEmail(string $email): self
+    public function getEmail(): ?string
+    {
+        return $this->email;
+    }
+
+    /**
+     * @param string|null $email
+     *
+     * @return $this
+     */
+    public function setEmail(?string $email): self
     {
         $this->email = $email;
 
@@ -113,11 +155,19 @@ class Receipt
     }
 
     /**
-     * @param string $phone
-     *
-     * @return Receipt
+     * @return string|null
      */
-    public function setPhone(string $phone): self
+    public function getPhone(): ?string
+    {
+        return $this->phone;
+    }
+
+    /**
+     * @param string|null $phone
+     *
+     * @return $this
+     */
+    public function setPhone(?string $phone): self
     {
         $this->phone = $phone;
 
@@ -125,11 +175,19 @@ class Receipt
     }
 
     /**
-     * @param bool $is_bso
-     *
-     * @return Receipt
+     * @return bool|null
      */
-    public function setIsBso(bool $is_bso): self
+    public function getIsBso(): ?bool
+    {
+        return $this->is_bso;
+    }
+
+    /**
+     * @param bool|null $is_bso
+     *
+     * @return $this
+     */
+    public function setIsBso(?bool $is_bso): self
     {
         $this->is_bso = $is_bso;
 
@@ -137,11 +195,19 @@ class Receipt
     }
 
     /**
-     * @param float $electronic_amount
-     *
-     * @return Receipt
+     * @return float|null
      */
-    public function setElectronicAmount(float $electronic_amount): self
+    public function getElectronicAmount(): ?float
+    {
+        return $this->electronic_amount;
+    }
+
+    /**
+     * @param float|null $electronic_amount
+     *
+     * @return $this
+     */
+    public function setElectronicAmount(?float $electronic_amount): self
     {
         $this->electronic_amount = $electronic_amount;
 
@@ -149,11 +215,19 @@ class Receipt
     }
 
     /**
-     * @param float $advance_payment_amount
-     *
-     * @return Receipt
+     * @return float|null
      */
-    public function setAdvancePaymentAmount(float $advance_payment_amount): self
+    public function getAdvancePaymentAmount(): ?float
+    {
+        return $this->advance_payment_amount;
+    }
+
+    /**
+     * @param float|null $advance_payment_amount
+     *
+     * @return $this
+     */
+    public function setAdvancePaymentAmount(?float $advance_payment_amount): self
     {
         $this->advance_payment_amount = $advance_payment_amount;
 
@@ -161,11 +235,19 @@ class Receipt
     }
 
     /**
-     * @param float $credit_amount
-     *
-     * @return Receipt
+     * @return float|null
      */
-    public function setCreditAmount(float $credit_amount): self
+    public function getCreditAmount(): ?float
+    {
+        return $this->credit_amount;
+    }
+
+    /**
+     * @param float|null $credit_amount
+     *
+     * @return $this
+     */
+    public function setCreditAmount(?float $credit_amount): self
     {
         $this->credit_amount = $credit_amount;
 
@@ -173,25 +255,21 @@ class Receipt
     }
 
     /**
-     * @param float $provision_amount
-     *
-     * @return Receipt
+     * @return float|null
      */
-    public function setProvisionAmount(float $provision_amount): self
+    public function getProvisionAmount(): ?float
     {
-        $this->provision_amount = $provision_amount;
-
-        return $this;
+        return $this->provision_amount;
     }
 
     /**
-     * @param Item $item
+     * @param float|null $provision_amount
      *
-     * @return Receipt
+     * @return $this
      */
-    public function addItem(Item $item): self
+    public function setProvisionAmount(?float $provision_amount): self
     {
-        $this->items[] = $item;
+        $this->provision_amount = $provision_amount;
 
         return $this;
     }
@@ -221,6 +299,6 @@ class Receipt
                 'credit'         => \number_format((float) $this->credit_amount, 2, '.', ''),
                 'provision'      => \number_format((float) $this->provision_amount, 2, '.', ''),
             ],
-        ]);
+        ], static function ($value) { return $value !== null; });
     }
 }

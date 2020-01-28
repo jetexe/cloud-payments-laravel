@@ -5,6 +5,7 @@ declare(strict_types = 1);
 namespace AvtoDev\Tests\Unit;
 
 use AvtoDev\Tests\AbstractTestCase;
+use Illuminate\Support\Str;
 
 abstract class AbstractUnitTestCase extends AbstractTestCase
 {

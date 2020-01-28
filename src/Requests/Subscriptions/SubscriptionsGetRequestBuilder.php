@@ -25,7 +25,7 @@ class SubscriptionsGetRequestBuilder extends AbstractRequestBuilder
         ];
     }
 
-    protected function getUti(): UriInterface
+    protected function getUri(): UriInterface
     {
         return new Uri('/subscriptions/get');
     }

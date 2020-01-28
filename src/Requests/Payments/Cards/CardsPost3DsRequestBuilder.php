@@ -89,7 +89,7 @@ class CardsPost3DsRequestBuilder extends AbstractRequestBuilder
     /**
      * {@inheritDoc}
      */
-    protected function getUti(): UriInterface
+    protected function getUri(): UriInterface
     {
         return new Uri('/payments/cards/post3ds');
     }

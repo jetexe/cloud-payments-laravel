@@ -50,9 +50,9 @@ class PaymentsConfirmRequestBuilder extends AbstractRequestBuilder
      *
      * @param int $transaction_id
      *
-     * @return PaymentsConfirmRequestBuilder
+     * @return $this
      */
-    public function setTransactionId(int $transaction_id): PaymentsConfirmRequestBuilder
+    public function setTransactionId(int $transaction_id): self
     {
         $this->transaction_id = $transaction_id;
 
@@ -74,9 +74,9 @@ class PaymentsConfirmRequestBuilder extends AbstractRequestBuilder
      *
      * @param float $amount
      *
-     * @return PaymentsConfirmRequestBuilder
+     * @return $this
      */
-    public function setAmount(float $amount): PaymentsConfirmRequestBuilder
+    public function setAmount(float $amount): self
     {
         $this->amount = $amount;
 
@@ -94,9 +94,9 @@ class PaymentsConfirmRequestBuilder extends AbstractRequestBuilder
     /**
      * @param array $json_data
      *
-     * @return PaymentsConfirmRequestBuilder
+     * @return $this
      */
-    public function setJsonData(array $json_data): PaymentsConfirmRequestBuilder
+    public function setJsonData(array $json_data): self
     {
         $this->json_data = $json_data;
 
@@ -110,7 +110,7 @@ class PaymentsConfirmRequestBuilder extends AbstractRequestBuilder
      */
     protected function getRequestParams(): array
     {
-        $this->json_data = \array_merge($this->json_data, $this->getRequestParams());
+        $this->json_data = \array_merge($this->json_data ?? [], $this->getReceiptData());
 
         return [
             'TransactionId' => $this->transaction_id,
@@ -122,7 +122,7 @@ class PaymentsConfirmRequestBuilder extends AbstractRequestBuilder
     /**
      * {@inheritDoc}
      */
-    protected function getUti(): UriInterface
+    protected function getUri(): UriInterface
     {
         return new Uri('/payments/confirm');
     }

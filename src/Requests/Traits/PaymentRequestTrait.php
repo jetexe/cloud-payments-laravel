@@ -31,24 +31,24 @@ trait PaymentRequestTrait
     protected $ip_address;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $invoice_id;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $description;
 
     /**
      * Required if subscription or payment token needed.
      *
-     * @var string
+     * @var string|null
      */
     protected $account_id;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $email;
 
@@ -58,16 +58,26 @@ trait PaymentRequestTrait
      * in the registry of operations uploaded to the Personal Account: name, firstName, middleName, lastName, nick,
      * phone, address, comment, birthDate.
      *
-     * @var array
+     * @var array|null
      */
-    protected $json_data = [];
+    protected $json_data;
+
+    /**
+     * Required.
+     *
+     * @return float
+     */
+    public function getAmount(): float
+    {
+        return $this->amount;
+    }
 
     /**
      * Required.
      *
      * @param float $amount
      *
-     * @return self
+     * @return $this
      */
     public function setAmount(float $amount): self
     {
@@ -79,9 +89,19 @@ trait PaymentRequestTrait
     /**
      * Required.
      *
+     * @return string
+     */
+    public function getCurrency(): string
+    {
+        return $this->currency;
+    }
+
+    /**
+     * Required.
+     *
      * @param string $currency
      *
-     * @return self
+     * @return $this
      */
     public function setCurrency(string $currency): self
     {
@@ -93,9 +113,19 @@ trait PaymentRequestTrait
     /**
      * Required.
      *
+     * @return string
+     */
+    public function getIpAddress(): string
+    {
+        return $this->ip_address;
+    }
+
+    /**
+     * Required.
+     *
      * @param string $ip_address
      *
-     * @return self
+     * @return $this
      */
     public function setIpAddress(string $ip_address): self
     {
@@ -105,11 +135,19 @@ trait PaymentRequestTrait
     }
 
     /**
-     * @param string $invoice_id
-     *
-     * @return self
+     * @return string|null
      */
-    public function setInvoiceId(string $invoice_id): self
+    public function getInvoiceId(): ?string
+    {
+        return $this->invoice_id;
+    }
+
+    /**
+     * @param string|null $invoice_id
+     *
+     * @return $this
+     */
+    public function setInvoiceId(?string $invoice_id): self
     {
         $this->invoice_id = $invoice_id;
 
@@ -117,11 +155,19 @@ trait PaymentRequestTrait
     }
 
     /**
-     * @param string $description
-     *
-     * @return self
+     * @return string|null
      */
-    public function setDescription(string $description): self
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    /**
+     * @param string|null $description
+     *
+     * @return $this
+     */
+    public function setDescription(?string $description): self
     {
         $this->description = $description;
 
@@ -129,27 +175,45 @@ trait PaymentRequestTrait
     }
 
     /**
-     * Required if subscription or payment token needed.
-     *
-     * @param string $account_id
-     *
-     * @return self
+     * @return string|null
      */
-    public function setAccountId(string $account_id): self
+    public function getEmail(): ?string
     {
-        $this->account_id = $account_id;
+        return $this->email;
+    }
+
+    /**
+     * @param string|null $email
+     *
+     * @return $this
+     */
+    public function setEmail(?string $email): self
+    {
+        $this->email = $email;
 
         return $this;
     }
 
     /**
-     * @param string $email
+     * Required if subscription or payment token needed.
      *
-     * @return self
+     * @return string|null
      */
-    public function setEmail(string $email): self
+    public function getAccountId(): ?string
     {
-        $this->email = $email;
+        return $this->account_id;
+    }
+
+    /**
+     * Required if subscription or payment token needed.
+     *
+     * @param string|null $account_id
+     *
+     * @return $this
+     */
+    public function setAccountId(?string $account_id): self
+    {
+        $this->account_id = $account_id;
 
         return $this;
     }
@@ -160,11 +224,24 @@ trait PaymentRequestTrait
      * in the registry of operations uploaded to the Personal Account: name, firstName, middleName, lastName, nick,
      * phone, address, comment, birthDate.
      *
-     * @param array $json_data
-     *
-     * @return self
+     * @return array|null
      */
-    public function setJsonData(array $json_data): self
+    public function getJsonData(): ?array
+    {
+        return $this->json_data;
+    }
+
+    /**
+     * Any other data that will be associated with the transaction, including instructions for creating a subscription
+     * or generating an online check. We have reserved the names of the following parameters and display their contents
+     * in the registry of operations uploaded to the Personal Account: name, firstName, middleName, lastName, nick,
+     * phone, address, comment, birthDate.
+     *
+     * @param array|null $json_data
+     *
+     * @return $this
+     */
+    public function setJsonData(?array $json_data): self
     {
         $this->json_data = $json_data;
 
@@ -187,7 +264,9 @@ trait PaymentRequestTrait
             'Description' => $this->description,
             'AccountId'   => $this->account_id,
             'Email'       => $this->email,
-            'JsonData'    => Json::encode($this->json_data),
+            'JsonData'    => $this->json_data !== null
+                ? Json::encode($this->json_data)
+                : null,
         ]);
     }
 }

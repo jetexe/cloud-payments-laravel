@@ -362,7 +362,7 @@ class SubscriptionsCreateRequestBuilder extends AbstractRequestBuilder
     /**
      * {@inheritDoc}
      */
-    protected function getUti(): UriInterface
+    protected function getUri(): UriInterface
     {
         return new Uri('/subscriptions/create');
     }

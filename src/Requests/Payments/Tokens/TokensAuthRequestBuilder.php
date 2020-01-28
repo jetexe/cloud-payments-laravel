@@ -64,7 +64,7 @@ class TokensAuthRequestBuilder extends AbstractRequestBuilder
     /**
      * {@inheritDoc}
      */
-    protected function getUti(): UriInterface
+    protected function getUri(): UriInterface
     {
         return new Uri('/tokens/auth');
     }

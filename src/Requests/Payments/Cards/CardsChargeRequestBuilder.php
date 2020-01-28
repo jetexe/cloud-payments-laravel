@@ -13,7 +13,7 @@ class CardsChargeRequestBuilder extends CardsAuthRequestBuilder
     /**
      * {@inheritDoc}
      */
-    protected function getUti(): UriInterface
+    protected function getUri(): UriInterface
     {
         return new Uri('/payments/cards/charge');
     }

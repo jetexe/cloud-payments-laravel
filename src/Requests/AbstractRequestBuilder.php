@@ -50,7 +50,7 @@ abstract class AbstractRequestBuilder
      */
     public function buildRequest(): RequestInterface
     {
-        $uri = $this->getUti();
+        $uri = $this->getUri();
 
         if ($uri->getHost() === '') {
             $uri = UriResolver::resolve(new Uri(self::BASE_URI), $uri);
@@ -79,5 +79,5 @@ abstract class AbstractRequestBuilder
     /**
      * @return UriInterface
      */
-    abstract protected function getUti(): UriInterface;
+    abstract protected function getUri(): UriInterface;
 }

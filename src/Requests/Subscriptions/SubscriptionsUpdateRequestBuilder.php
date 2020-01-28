@@ -314,13 +314,13 @@ class SubscriptionsUpdateRequestBuilder extends AbstractRequestBuilder
             'Period'              => $this->period,
             'MaxPeriods'          => $this->max_periods,
             'CustomerReceipt'     => $this->customer_receipt,
-        ]);
+        ], static function ($value) { return $value === null; });
     }
 
     /**
      * {@inheritDoc}
      */
-    protected function getUti(): UriInterface
+    protected function getUri(): UriInterface
     {
         return new Uri('/subscriptions/update');
     }

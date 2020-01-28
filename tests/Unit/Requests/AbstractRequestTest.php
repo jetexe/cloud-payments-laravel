@@ -37,7 +37,7 @@ class AbstractRequestTest extends AbstractUnitTestCase
                 return $this->params;
             }
 
-            protected function getUti(): UriInterface
+            protected function getUri(): UriInterface
             {
                 return new Uri($this->uri);
             }

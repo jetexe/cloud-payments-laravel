@@ -14,7 +14,7 @@ class TokensChargeRequestFactory extends TokensAuthRequestBuilder
     /**
      * {@inheritDoc}
      */
-    protected function getUti(): UriInterface
+    protected function getUri(): UriInterface
     {
         return new Uri('/tokens/charge');
     }
