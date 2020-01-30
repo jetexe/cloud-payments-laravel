@@ -2,11 +2,12 @@
 
 declare(strict_types = 1);
 
-namespace Unit\Requests;
+namespace AvtoDev\Tests\Unit\Requests;
 
-use AvtoDev\CloudPayments\Requests\AbstractRequestBuilder;
-use AvtoDev\Tests\Unit\AbstractUnitTestCase;
+use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\UriInterface;
+use AvtoDev\Tests\Unit\AbstractUnitTestCase;
+use AvtoDev\CloudPayments\Requests\AbstractRequestBuilder;
 
 abstract class AbstractRequestBuilderTest extends AbstractUnitTestCase
 {
@@ -15,10 +16,16 @@ abstract class AbstractRequestBuilderTest extends AbstractUnitTestCase
      */
     protected $request_builder;
 
+    /**
+     * @var UriInterface
+     */
+    protected $uri;
+
     public function setUp(): void
     {
         parent::setUp();
         $this->request_builder = $this->getRequestBuilder();
+        $this->uri             = $this->getUri();
     }
 
     /**
@@ -34,6 +41,17 @@ abstract class AbstractRequestBuilderTest extends AbstractUnitTestCase
         $this->assertSame($uri->getHost(), $this->getUri()->getHost());
         $this->assertSame($uri->getPath(), $this->getUri()->getPath());
         $this->assertEquals($uri, $this->getUri());
+    }
+
+    /**
+     * @coversNothing
+     */
+    public function testHeaders()
+    {
+        /** @var RequestInterface $request */
+        $request = $this->request_builder->buildRequest();
+        $this->assertTrue($request->hasHeader('Content-Type'));
+        $this->assertSame('application/json', $request->getHeader('Content-Type')[0]);
     }
 
     abstract protected function getUri(): UriInterface;

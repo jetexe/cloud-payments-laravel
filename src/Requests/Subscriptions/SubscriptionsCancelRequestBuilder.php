@@ -14,9 +14,33 @@ class SubscriptionsCancelRequestBuilder extends AbstractRequestBuilder
     /**
      * Required.
      *
-     * @var string
+     * @var string|null
      */
     protected $id;
+
+    /**
+     * Required.
+     *
+     * @return string|null
+     */
+    public function getId(): ?string
+    {
+        return $this->id;
+    }
+
+    /**
+     * Required.
+     *
+     * @param string|null $id
+     *
+     * @return SubscriptionsCancelRequestBuilder
+     */
+    public function setId(?string $id): SubscriptionsCancelRequestBuilder
+    {
+        $this->id = $id;
+
+        return $this;
+    }
 
     /**
      * {@inheritDoc}

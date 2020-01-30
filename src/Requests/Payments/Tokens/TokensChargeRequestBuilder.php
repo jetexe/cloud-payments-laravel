@@ -9,13 +9,13 @@ use Psr\Http\Message\UriInterface;
 /**
  * @see https://developers.cloudpayments.ru/#oplata-po-tokenu-rekarring
  */
-class TokensChargeRequestFactory extends TokensAuthRequestBuilder
+class TokensChargeRequestBuilder extends TokensAuthRequestBuilder
 {
     /**
      * {@inheritDoc}
      */
     protected function getUri(): UriInterface
     {
-        return new Uri('/tokens/charge');
+        return new Uri('/payments/tokens/charge');
     }
 }

@@ -264,7 +264,7 @@ trait PaymentRequestTrait
             'Description' => $this->description,
             'AccountId'   => $this->account_id,
             'Email'       => $this->email,
-            'JsonData'    => $this->json_data !== null
+            'JsonData'    => $this->json_data !== null && $this->json_data !== []
                 ? Json::encode($this->json_data)
                 : null,
         ]);

@@ -115,7 +115,9 @@ class PaymentsConfirmRequestBuilder extends AbstractRequestBuilder
         return [
             'TransactionId' => $this->transaction_id,
             'Amount'        => $this->amount,
-            'JsonData'      => Json::encode($this->json_data),
+            'JsonData'      => $this->json_data !== null && $this->json_data !== []
+                ? Json::encode($this->json_data)
+                : null,
         ];
     }
 

@@ -21,14 +21,14 @@ class TokensAuthRequestBuilder extends AbstractRequestBuilder
     /**
      * Required.
      *
-     * @var string
+     * @var string|null
      */
     protected $token;
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getToken(): string
+    public function getToken(): ?string
     {
         return $this->token;
     }
@@ -36,11 +36,11 @@ class TokensAuthRequestBuilder extends AbstractRequestBuilder
     /**
      * Required.
      *
-     * @param string $token
+     * @param string|null $token
      *
      * @return $this
      */
-    public function setToken(string $token): self
+    public function setToken(?string $token): self
     {
         $this->token = $token;
 
@@ -54,7 +54,7 @@ class TokensAuthRequestBuilder extends AbstractRequestBuilder
      */
     protected function getRequestParams(): array
     {
-        $this->json_data = \array_merge($this->json_data, $this->getRequestParams());
+        $this->json_data = \array_merge($this->json_data ?? [], $this->getReceiptData());
 
         return \array_merge($this->getCommonPaymentParams(), [
             'Token' => $this->token,
@@ -66,6 +66,6 @@ class TokensAuthRequestBuilder extends AbstractRequestBuilder
      */
     protected function getUri(): UriInterface
     {
-        return new Uri('/tokens/auth');
+        return new Uri('/payments/tokens/auth');
     }
 }

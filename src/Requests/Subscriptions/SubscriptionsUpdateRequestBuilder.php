@@ -2,10 +2,12 @@
 
 namespace AvtoDev\CloudPayments\Requests\Subscriptions;
 
+use AvtoDev\CloudPayments\Receipts\Receipt;
 use Carbon\Carbon;
 use GuzzleHttp\Psr7\Uri;
 use Psr\Http\Message\UriInterface;
 use AvtoDev\CloudPayments\Requests\AbstractRequestBuilder;
+use Psy\Util\Json;
 
 /**
  * @see https://developers.cloudpayments.ru/#izmenenie-podpiski-na-rekurrentnye-platezhi
@@ -15,70 +17,70 @@ class SubscriptionsUpdateRequestBuilder extends AbstractRequestBuilder
     /**
      * Required.
      *
-     * @var string
+     * @var string|null
      */
     protected $id;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $description;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $email;
 
     /**
-     * @var float
+     * @var float|null
      */
     protected $amount;
 
     /**
      * @see Currency
      *
-     * @var string
+     * @var string|null
      */
     protected $currency;
 
     /**
-     * @var bool
+     * @var bool|null
      */
     protected $require_confirmation;
 
     /**
-     * @var Carbon
+     * @var Carbon|null
      */
     protected $start_date;
 
     /**
      * @see Interval
      *
-     * @var string
+     * @var string|null
      */
     protected $interval;
 
     /**
-     * @var int
+     * @var int|null
      */
     protected $period;
 
     /**
-     * @var int
+     * @var int|null
      */
     protected $max_periods;
 
     /**
-     * @var string
+     * @var Receipt|null
      */
     protected $customer_receipt;
 
     /**
      * Required.
      *
-     * @return string
+     * @return string|null
      */
-    public function getId(): string
+    public function getId(): ?string
     {
         return $this->id;
     }
@@ -86,11 +88,11 @@ class SubscriptionsUpdateRequestBuilder extends AbstractRequestBuilder
     /**
      * Required.
      *
-     * @param string $id
+     * @param string|null $id
      *
-     * @return SubscriptionsUpdateRequestBuilder
+     * @return $this
      */
-    public function setId(string $id): SubscriptionsUpdateRequestBuilder
+    public function setId(?string $id): self
     {
         $this->id = $id;
 
@@ -98,19 +100,19 @@ class SubscriptionsUpdateRequestBuilder extends AbstractRequestBuilder
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getDescription(): string
+    public function getDescription(): ?string
     {
         return $this->description;
     }
 
     /**
-     * @param string $description
+     * @param string|null $description
      *
-     * @return SubscriptionsUpdateRequestBuilder
+     * @return $this
      */
-    public function setDescription(string $description): SubscriptionsUpdateRequestBuilder
+    public function setDescription(?string $description): self
     {
         $this->description = $description;
 
@@ -118,19 +120,19 @@ class SubscriptionsUpdateRequestBuilder extends AbstractRequestBuilder
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getEmail(): string
+    public function getEmail(): ?string
     {
         return $this->email;
     }
 
     /**
-     * @param string $email
+     * @param string|null $email
      *
-     * @return SubscriptionsUpdateRequestBuilder
+     * @return $this
      */
-    public function setEmail(string $email): SubscriptionsUpdateRequestBuilder
+    public function setEmail(?string $email): self
     {
         $this->email = $email;
 
@@ -138,19 +140,19 @@ class SubscriptionsUpdateRequestBuilder extends AbstractRequestBuilder
     }
 
     /**
-     * @return float
+     * @return float|null
      */
-    public function getAmount(): float
+    public function getAmount(): ?float
     {
         return $this->amount;
     }
 
     /**
-     * @param float $amount
+     * @param float|null $amount
      *
-     * @return SubscriptionsUpdateRequestBuilder
+     * @return $this
      */
-    public function setAmount(float $amount): SubscriptionsUpdateRequestBuilder
+    public function setAmount(?float $amount): self
     {
         $this->amount = $amount;
 
@@ -158,19 +160,19 @@ class SubscriptionsUpdateRequestBuilder extends AbstractRequestBuilder
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getCurrency(): string
+    public function getCurrency(): ?string
     {
         return $this->currency;
     }
 
     /**
-     * @param string $currency
+     * @param string|null $currency
      *
-     * @return SubscriptionsUpdateRequestBuilder
+     * @return $this
      */
-    public function setCurrency(string $currency): SubscriptionsUpdateRequestBuilder
+    public function setCurrency(?string $currency): self
     {
         $this->currency = $currency;
 
@@ -178,19 +180,19 @@ class SubscriptionsUpdateRequestBuilder extends AbstractRequestBuilder
     }
 
     /**
-     * @return bool
+     * @return bool|null
      */
-    public function isRequireConfirmation(): bool
+    public function getRequireConfirmation(): ?bool
     {
         return $this->require_confirmation;
     }
 
     /**
-     * @param bool $require_confirmation
+     * @param bool|null $require_confirmation
      *
-     * @return SubscriptionsUpdateRequestBuilder
+     * @return $this
      */
-    public function setRequireConfirmation(bool $require_confirmation): SubscriptionsUpdateRequestBuilder
+    public function setRequireConfirmation(?bool $require_confirmation): self
     {
         $this->require_confirmation = $require_confirmation;
 
@@ -198,39 +200,42 @@ class SubscriptionsUpdateRequestBuilder extends AbstractRequestBuilder
     }
 
     /**
-     * @return Carbon
+     * @return Carbon|null
      */
-    public function getStartDate(): Carbon
+    public function getStartDate(): ?Carbon
     {
         return $this->start_date;
     }
 
     /**
-     * @param Carbon $start_date
+     * @param Carbon|null $start_date
      *
-     * @return SubscriptionsUpdateRequestBuilder
+     * @return $this
      */
-    public function setStartDate(Carbon $start_date): SubscriptionsUpdateRequestBuilder
+    public function setStartDate(?Carbon $start_date): self
     {
+        if ($start_date instanceof Carbon) {
+            $start_date = clone $start_date;
+        }
         $this->start_date = $start_date;
 
         return $this;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getInterval(): string
+    public function getInterval(): ?string
     {
         return $this->interval;
     }
 
     /**
-     * @param string $interval
+     * @param string|null $interval
      *
-     * @return SubscriptionsUpdateRequestBuilder
+     * @return $this
      */
-    public function setInterval(string $interval): SubscriptionsUpdateRequestBuilder
+    public function setInterval(?string $interval): self
     {
         $this->interval = $interval;
 
@@ -238,19 +243,19 @@ class SubscriptionsUpdateRequestBuilder extends AbstractRequestBuilder
     }
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getPeriod(): int
+    public function getPeriod(): ?int
     {
         return $this->period;
     }
 
     /**
-     * @param int $period
+     * @param int|null $period
      *
-     * @return SubscriptionsUpdateRequestBuilder
+     * @return $this
      */
-    public function setPeriod(int $period): SubscriptionsUpdateRequestBuilder
+    public function setPeriod(?int $period): self
     {
         $this->period = $period;
 
@@ -258,19 +263,19 @@ class SubscriptionsUpdateRequestBuilder extends AbstractRequestBuilder
     }
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getMaxPeriods(): int
+    public function getMaxPeriods(): ?int
     {
         return $this->max_periods;
     }
 
     /**
-     * @param int $max_periods
+     * @param int|null $max_periods
      *
-     * @return SubscriptionsUpdateRequestBuilder
+     * @return $this
      */
-    public function setMaxPeriods(int $max_periods): SubscriptionsUpdateRequestBuilder
+    public function setMaxPeriods(?int $max_periods): self
     {
         $this->max_periods = $max_periods;
 
@@ -278,19 +283,19 @@ class SubscriptionsUpdateRequestBuilder extends AbstractRequestBuilder
     }
 
     /**
-     * @return string
+     * @return Receipt|null
      */
-    public function getCustomerReceipt(): string
+    public function getCustomerReceipt(): ?Receipt
     {
         return $this->customer_receipt;
     }
 
     /**
-     * @param string $customer_receipt
+     * @param Receipt|null $customer_receipt
      *
-     * @return SubscriptionsUpdateRequestBuilder
+     * @return $this
      */
-    public function setCustomerReceipt(string $customer_receipt): SubscriptionsUpdateRequestBuilder
+    public function setCustomerReceipt(?Receipt $customer_receipt): self
     {
         $this->customer_receipt = $customer_receipt;
 
@@ -302,19 +307,23 @@ class SubscriptionsUpdateRequestBuilder extends AbstractRequestBuilder
      */
     protected function getRequestParams(): array
     {
-        return \array_filter([
+        return [
             'Id'                  => $this->id,
             'Description'         => $this->description,
             'Email'               => $this->email,
             'Amount'              => $this->amount,
             'Currency'            => $this->currency,
             'RequireConfirmation' => $this->require_confirmation,
-            'StartDate'           => $this->start_date->toRfc3339String(),
+            'StartDate'           => $this->start_date instanceof Carbon
+                ? $this->start_date->toRfc3339String()
+                : null,
             'Interval'            => $this->interval,
             'Period'              => $this->period,
             'MaxPeriods'          => $this->max_periods,
-            'CustomerReceipt'     => $this->customer_receipt,
-        ], static function ($value) { return $value === null; });
+            'CustomerReceipt'     => $this->customer_receipt instanceof Receipt
+                ? Json::encode($this->customer_receipt->toArray())
+                : null,
+        ];
     }
 
     /**

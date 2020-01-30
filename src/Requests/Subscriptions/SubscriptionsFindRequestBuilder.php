@@ -14,16 +14,16 @@ class SubscriptionsFindRequestBuilder extends AbstractRequestBuilder
     /**
      * Required.
      *
-     * @var string
+     * @var string|null
      */
     protected $account_id;
 
     /**
      * Required.
      *
-     * @return string
+     * @return string|null
      */
-    public function getAccountId(): string
+    public function getAccountId(): ?string
     {
         return $this->account_id;
     }
@@ -33,9 +33,9 @@ class SubscriptionsFindRequestBuilder extends AbstractRequestBuilder
      *
      * @param string $account_id
      *
-     * @return SubscriptionsFindRequestBuilder
+     * @return $this
      */
-    public function setAccountId(string $account_id): SubscriptionsFindRequestBuilder
+    public function setAccountId(?string $account_id): self
     {
         $this->account_id = $account_id;
 
@@ -48,7 +48,7 @@ class SubscriptionsFindRequestBuilder extends AbstractRequestBuilder
     protected function getRequestParams(): array
     {
         return [
-            'accountId' => $this->account_id,
+            'AccountId' => $this->account_id,
         ];
     }
 

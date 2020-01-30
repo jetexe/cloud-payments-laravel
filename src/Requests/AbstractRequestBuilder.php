@@ -63,8 +63,15 @@ abstract class AbstractRequestBuilder
         }
 
         /** @var RequestInterface $request */
-        $request = $request->withHeader('Content-Type', 'application/json')
-            ->withBody(stream_for(Json::encode($this->getRequestParams())));
+        $request = $request->withHeader('Content-Type', 'application/json');
+
+        $request_data = \array_filter($this->getRequestParams(), static function ($value) {
+            return $value !== null && $value !== [];
+        });
+
+        if ($request_data !== []) {
+            $request = $request->withBody(stream_for(Json::encode($request_data)));
+        }
 
         return $request;
     }

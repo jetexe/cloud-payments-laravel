@@ -2,12 +2,14 @@
 
 namespace AvtoDev\CloudPayments\Requests\Subscriptions;
 
+use AvtoDev\CloudPayments\Receipts\Receipt;
 use AvtoDev\CloudPayments\References\Currency;
 use AvtoDev\CloudPayments\References\Interval;
 use AvtoDev\CloudPayments\Requests\AbstractRequestBuilder;
 use Carbon\Carbon;
 use GuzzleHttp\Psr7\Uri;
 use Psr\Http\Message\UriInterface;
+use Psy\Util\Json;
 
 /**
  * @see https://developers.cloudpayments.ru/#sozdanie-podpiski-na-rekurrentnye-platezhi
@@ -17,35 +19,35 @@ class SubscriptionsCreateRequestBuilder extends AbstractRequestBuilder
     /**
      * Required.
      *
-     * @var string
+     * @var string|null
      */
     protected $token;
 
     /**
      * Required.
      *
-     * @var string
+     * @var string|null
      */
     protected $account_id;
 
     /**
      * Required.
      *
-     * @var string
+     * @var string|null
      */
     protected $description;
 
     /**
      * Required.
      *
-     * @var string
+     * @var string|null
      */
     protected $email;
 
     /**
      * Required.
      *
-     * @var float
+     * @var float|null
      */
     protected $amount;
 
@@ -54,21 +56,21 @@ class SubscriptionsCreateRequestBuilder extends AbstractRequestBuilder
      *
      * @see Currency
      *
-     * @var string
+     * @var string|null
      */
     protected $currency;
 
     /**
      * Required.
      *
-     * @var bool
+     * @var bool|null
      */
     protected $require_confirmation;
 
     /**
      * Required.
      *
-     * @var Carbon
+     * @var Carbon|null
      */
     protected $start_date;
 
@@ -77,41 +79,45 @@ class SubscriptionsCreateRequestBuilder extends AbstractRequestBuilder
      *
      * @see Interval
      *
-     * @var string
+     * @var string|null
      */
     protected $interval;
 
     /**
      * Required.
      *
-     * @var int
+     * @var int|null
      */
     protected $period;
 
     /**
-     * @var int
+     * @var int|null
      */
     protected $max_periods;
 
     /**
-     * @var string
+     * @var Receipt|null
      */
     protected $customer_receipt;
 
     /**
-     * @return string
+     * Required.
+     *
+     * @return string|null
      */
-    public function getToken(): string
+    public function getToken(): ?string
     {
         return $this->token;
     }
 
     /**
-     * @param string $token
+     * Required.
      *
-     * @return SubscriptionsCreateRequestBuilder
+     * @param string|null $token
+     *
+     * @return $this
      */
-    public function setToken(string $token): SubscriptionsCreateRequestBuilder
+    public function setToken(?string $token): self
     {
         $this->token = $token;
 
@@ -119,19 +125,23 @@ class SubscriptionsCreateRequestBuilder extends AbstractRequestBuilder
     }
 
     /**
-     * @return string
+     * Required.
+     *
+     * @return string|null
      */
-    public function getAccountId(): string
+    public function getAccountId(): ?string
     {
         return $this->account_id;
     }
 
     /**
-     * @param string $account_id
+     * Required.
      *
-     * @return SubscriptionsCreateRequestBuilder
+     * @param string|null $account_id
+     *
+     * @return $this
      */
-    public function setAccountId(string $account_id): SubscriptionsCreateRequestBuilder
+    public function setAccountId(?string $account_id): self
     {
         $this->account_id = $account_id;
 
@@ -139,19 +149,23 @@ class SubscriptionsCreateRequestBuilder extends AbstractRequestBuilder
     }
 
     /**
-     * @return string
+     * Required.
+     *
+     * @return string|null
      */
-    public function getDescription(): string
+    public function getDescription(): ?string
     {
         return $this->description;
     }
 
     /**
-     * @param string $description
+     * Required.
      *
-     * @return SubscriptionsCreateRequestBuilder
+     * @param string|null $description
+     *
+     * @return $this
      */
-    public function setDescription(string $description): SubscriptionsCreateRequestBuilder
+    public function setDescription(?string $description): self
     {
         $this->description = $description;
 
@@ -159,19 +173,23 @@ class SubscriptionsCreateRequestBuilder extends AbstractRequestBuilder
     }
 
     /**
-     * @return string
+     * Required.
+     *
+     * @return string|null
      */
-    public function getEmail(): string
+    public function getEmail(): ?string
     {
         return $this->email;
     }
 
     /**
-     * @param string $email
+     * Required.
      *
-     * @return SubscriptionsCreateRequestBuilder
+     * @param string|null $email
+     *
+     * @return $this
      */
-    public function setEmail(string $email): SubscriptionsCreateRequestBuilder
+    public function setEmail(?string $email): self
     {
         $this->email = $email;
 
@@ -179,19 +197,23 @@ class SubscriptionsCreateRequestBuilder extends AbstractRequestBuilder
     }
 
     /**
-     * @return float
+     * Required.
+     *
+     * @return float|null
      */
-    public function getAmount(): float
+    public function getAmount(): ?float
     {
         return $this->amount;
     }
 
     /**
-     * @param float $amount
+     * Required.
      *
-     * @return SubscriptionsCreateRequestBuilder
+     * @param float|null $amount
+     *
+     * @return $this
      */
-    public function setAmount(float $amount): SubscriptionsCreateRequestBuilder
+    public function setAmount(?float $amount): self
     {
         $this->amount = $amount;
 
@@ -199,19 +221,23 @@ class SubscriptionsCreateRequestBuilder extends AbstractRequestBuilder
     }
 
     /**
-     * @return string
+     * Required.
+     *
+     * @return string|null
      */
-    public function getCurrency(): string
+    public function getCurrency(): ?string
     {
         return $this->currency;
     }
 
     /**
-     * @param string $currency
+     * Required.
      *
-     * @return SubscriptionsCreateRequestBuilder
+     * @param string|null $currency
+     *
+     * @return $this
      */
-    public function setCurrency(string $currency): SubscriptionsCreateRequestBuilder
+    public function setCurrency(?string $currency): self
     {
         $this->currency = $currency;
 
@@ -219,19 +245,23 @@ class SubscriptionsCreateRequestBuilder extends AbstractRequestBuilder
     }
 
     /**
-     * @return bool
+     * Required.
+     *
+     * @return bool|null
      */
-    public function isRequireConfirmation(): bool
+    public function getRequireConfirmation(): ?bool
     {
         return $this->require_confirmation;
     }
 
     /**
-     * @param bool $require_confirmation
+     * Required.
      *
-     * @return SubscriptionsCreateRequestBuilder
+     * @param bool|null $require_confirmation
+     *
+     * @return $this
      */
-    public function setRequireConfirmation(bool $require_confirmation): SubscriptionsCreateRequestBuilder
+    public function setRequireConfirmation(?bool $require_confirmation): self
     {
         $this->require_confirmation = $require_confirmation;
 
@@ -239,39 +269,51 @@ class SubscriptionsCreateRequestBuilder extends AbstractRequestBuilder
     }
 
     /**
-     * @return Carbon
+     * Required.
+     *
+     * @return Carbon|null
      */
-    public function getStartDate(): Carbon
+    public function getStartDate(): ?Carbon
     {
         return $this->start_date;
     }
 
     /**
-     * @param Carbon $start_date
+     * Required.
      *
-     * @return SubscriptionsCreateRequestBuilder
+     * @param Carbon|null $start_date
+     *
+     * @return $this
      */
-    public function setStartDate(Carbon $start_date): SubscriptionsCreateRequestBuilder
+    public function setStartDate(?Carbon $start_date): self
     {
+        if ($start_date instanceof Carbon) {
+            $start_date = clone $start_date;
+        }
+
         $this->start_date = $start_date;
 
         return $this;
     }
 
     /**
-     * @return string
+     * Required.
+     *
+     * @return string|null
      */
-    public function getInterval(): string
+    public function getInterval(): ?string
     {
         return $this->interval;
     }
 
     /**
-     * @param string $interval
+     * Required.
      *
-     * @return SubscriptionsCreateRequestBuilder
+     * @param string|null $interval
+     *
+     * @return $this
      */
-    public function setInterval(string $interval): SubscriptionsCreateRequestBuilder
+    public function setInterval(?string $interval): self
     {
         $this->interval = $interval;
 
@@ -279,19 +321,23 @@ class SubscriptionsCreateRequestBuilder extends AbstractRequestBuilder
     }
 
     /**
-     * @return int
+     * Required.
+     *
+     * @return int|null
      */
-    public function getPeriod(): int
+    public function getPeriod(): ?int
     {
         return $this->period;
     }
 
     /**
-     * @param int $period
+     * Required.
      *
-     * @return SubscriptionsCreateRequestBuilder
+     * @param int|null $period
+     *
+     * @return $this
      */
-    public function setPeriod(int $period): SubscriptionsCreateRequestBuilder
+    public function setPeriod(?int $period): self
     {
         $this->period = $period;
 
@@ -299,19 +345,19 @@ class SubscriptionsCreateRequestBuilder extends AbstractRequestBuilder
     }
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getMaxPeriods(): int
+    public function getMaxPeriods(): ?int
     {
         return $this->max_periods;
     }
 
     /**
-     * @param int $max_periods
+     * @param int|null $max_periods
      *
-     * @return SubscriptionsCreateRequestBuilder
+     * @return $this
      */
-    public function setMaxPeriods(int $max_periods): SubscriptionsCreateRequestBuilder
+    public function setMaxPeriods(?int $max_periods): self
     {
         $this->max_periods = $max_periods;
 
@@ -319,19 +365,19 @@ class SubscriptionsCreateRequestBuilder extends AbstractRequestBuilder
     }
 
     /**
-     * @return string
+     * @return Receipt|null
      */
-    public function getCustomerReceipt(): string
+    public function getCustomerReceipt(): ?Receipt
     {
         return $this->customer_receipt;
     }
 
     /**
-     * @param string $customer_receipt
+     * @param Receipt|null $customer_receipt
      *
-     * @return SubscriptionsCreateRequestBuilder
+     * @return $this
      */
-    public function setCustomerReceipt(string $customer_receipt): SubscriptionsCreateRequestBuilder
+    public function setCustomerReceipt(?Receipt $customer_receipt): self
     {
         $this->customer_receipt = $customer_receipt;
 
@@ -351,11 +397,15 @@ class SubscriptionsCreateRequestBuilder extends AbstractRequestBuilder
             'Amount'              => $this->amount,
             'Currency'            => $this->currency,
             'RequireConfirmation' => $this->require_confirmation,
-            'StartDate'           => $this->start_date->toRfc3339String(),
+            'StartDate'           => $this->start_date
+                ? $this->start_date->toRfc3339String()
+                : null,
             'Interval'            => $this->interval,
             'Period'              => $this->period,
             'MaxPeriods'          => $this->max_periods,
-            'CustomerReceipt'     => $this->customer_receipt,
+            'CustomerReceipt'     => $this->customer_receipt instanceof Receipt
+                ? Json::encode($this->customer_receipt->toArray())
+                : null,
         ];
     }
 

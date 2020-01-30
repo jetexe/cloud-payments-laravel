@@ -61,15 +61,15 @@ class PaymentRequestTraitTest extends AbstractUnitTestCase
     {
         $this->assertArrayNotHasKey('JsonData', $this->request_builder->getCommonPaymentParamsData());
 
-        $this->request_builder->setJsonData([]);
+        $this->request_builder->setJsonData(['some']);
 
-        $this->assertSame([], $this->request_builder->getJsonData());
+        $this->assertSame(['some'], $this->request_builder->getJsonData());
 
         $common_payment_params = $this->request_builder->getCommonPaymentParamsData();
 
         $this->assertArrayHasKey('JsonData', $common_payment_params);
 
-        $this->assertSame('[]', $common_payment_params['JsonData']);
+        $this->assertSame('["some"]', $common_payment_params['JsonData']);
     }
 
     protected function fieldTest(string $property_name, $value, bool $is_nullable): void
